@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import sampleImage from '../../assets/Icons_Images/png/providers.png';
 
-const UserTypeCard = ({source, title, color, text, onPress}) => {
+const ProviderTypeCard = ({source, title, color, text, onPress}) => {
   const mergedStyle = [styles.userCardContainer, {backgroundColor: color}];
   return (
     <Pressable
@@ -10,12 +10,9 @@ const UserTypeCard = ({source, title, color, text, onPress}) => {
       style={({pressed}) =>
         pressed ? [...mergedStyle, styles.pressed] : mergedStyle
       }>
-      <View style={styles.iconContainer}>
+      <View style={styles.innerContainer}>
+        <Text style={[styles.titleText, styles.whiteText]}>{title}</Text>
         <Image style={styles.iconImage} source={sampleImage} />
-      </View>
-      <View style={styles.userTypeContainer}>
-        <Text style={[styles.userTypeText, styles.whiteText]}>{title}</Text>
-        <Text style={styles.whiteText}>{text}</Text>
       </View>
     </Pressable>
   );
@@ -23,11 +20,8 @@ const UserTypeCard = ({source, title, color, text, onPress}) => {
 
 const styles = StyleSheet.create({
   userCardContainer: {
+    padding: 6,
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 8,
-    padding: 8,
     gap: 10,
     overflow: 'hidden',
     elevation: 5,
@@ -36,10 +30,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
   },
   pressed: {opacity: 0.8},
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: 'white',
+    borderStyle: 'dotted',
+  },
   iconImage: {height: 80, width: 80},
-  iconContainer: {marginHorizontal: 2},
   userTypeContainer: {},
-  userTypeText: {fontSize: 16, fontWeight: 'bold'},
-  whiteText: {color: 'white'},
+  titleText: {fontSize: 16, fontWeight: 'bold'},
+  whiteText: {
+    color: 'white',
+  },
 });
-export default UserTypeCard;
+export default ProviderTypeCard;

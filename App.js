@@ -1,9 +1,11 @@
 import 'react-native-gesture-handler';
 import {Text, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+
 import WelcomeScreen from './screens/WelcomeScreen';
 import UserSelectScreen from './screens/UserSelectScreen';
-import {NavigationContainer} from '@react-navigation/native';
+import ProviderTypeScreen from './screens/ProviderTypeScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +26,11 @@ function App() {
           name="UserSelect"
           component={UserSelectScreen}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProviderType"
+          component={ProviderTypeScreen}
+          options={{title: 'Provider Type', headerTransparent: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
