@@ -1,9 +1,10 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import React from 'react';
-// import bg from '../assets/Icons_Images/png/round.png';
 import bg from '../../assets/Icons_Images/png/round.png';
 
 const CommonBg = ({children}) => {
+  // const {height, width} = Dimensions.get('screen');
+  // console.log(height, width);
   return (
     <View style={styles.rootContainer}>
       <Image source={bg} style={styles.backgoundImage} />
@@ -23,18 +24,18 @@ const styles = StyleSheet.create({
   backgoundImage: {
     flex: 1,
     objectFit: 'cover',
-    width: '150%',
-    borderWidth: 4,
+    // borderWidth: 4,
     right: '-50%',
     top: '-50%',
+    // position: 'absolute',
   },
   innerContainer: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
     position: 'absolute',
     padding: 15,
-    gap: 10,
-    marginTop: 100,
+    // gap: 10,
+    marginTop: 150,
   },
 });
 export default CommonBg;

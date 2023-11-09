@@ -1,9 +1,10 @@
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 
-const PrimaryButton = ({title, color, onPress}) => {
+const PrimaryButton = ({title, color, onPress, disabled}) => {
   return (
     <Pressable
+      disabled={disabled}
       onPress={onPress}
       style={({pressed}) =>
         pressed

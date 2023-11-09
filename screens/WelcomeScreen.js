@@ -1,56 +1,71 @@
 import React from 'react';
-import {View, Text, ImageBackground, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  StatusBar,
+} from 'react-native';
 
 import bg from '../assets/Icons_Images/png/bg.png';
 import logo from '../assets/Icons_Images/png/app-logo.png';
-
-import PrimayButton from '../components/UI/PrimaryButton';
-import ListItem from '../components/UI/ListItem';
+import {colors} from '../constants/GlobalStyles';
+import PrimayButton from '../components/ui/PrimaryButton';
+import ListItem from '../components/ui/ListItem';
 
 const WelcomeScreen = ({route, navigation}) => {
   function getStartedHandler() {
     navigation.navigate('UserSelect');
   }
   function loginAsGuestHandler() {
-    navigation.navigate('UserSelect');
+    navigation.navigate('FormScreen', {formType: 'login', userType: 'guest'});
   }
   return (
-    <ImageBackground
-      source={bg}
-      resizeMode="cover"
-      style={styles.backgoundImage}>
-      <View style={styles.rootContainer}>
-        <View style={styles.logoContainer}>
-          <Image style={styles.logoImage} source={logo} />
+    <>
+      <StatusBar
+        animated={true}
+        translucent={true}
+        backgroundColor={'transparent'}
+        barStyle={'light-content'}
+      />
+      <ImageBackground
+        source={bg}
+        resizeMode="cover"
+        style={styles.backgoundImage}>
+        <View style={styles.rootContainer}>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoImage} source={logo} />
+          </View>
+          <View style={styles.optionsContainer}>
+            <ListItem source={''} title={'Mobility Clinic'} />
+            <ListItem source={''} title={'Ideal Healthcare'} />
+            <ListItem source={''} title={'Mobility Rehab SVCS'} />
+            <ListItem source={''} title={'Green Prosthetics'} />
+            <ListItem source={''} title={'Care Crafters'} />
+          </View>
+          <View style={styles.summaryContainer}>
+            <Text style={styles.summaryText}>
+              Care with Personal Touch and Integrity Provide the most
+              appropriate and value based care all the time. We are just an
+              appointment away For your world class care!
+            </Text>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <PrimayButton
+              title="Get Started"
+              onPress={getStartedHandler}
+              color={colors.blue}
+            />
+            <PrimayButton
+              title="Login as Guest"
+              onPress={loginAsGuestHandler}
+              color={colors.green}
+            />
+          </View>
         </View>
-        <View style={styles.optionsContainer}>
-          <ListItem source={''} title={'Mobility Clinic'} />
-          <ListItem source={''} title={'Ideal Healthcare'} />
-          <ListItem source={''} title={'Mobility Rehab SVCS'} />
-          <ListItem source={''} title={'Green Prosthetics'} />
-          <ListItem source={''} title={'Care Crafters'} />
-        </View>
-        <View style={styles.summaryContainer}>
-          <Text style={styles.summaryText}>
-            Care with Personal Touch and Integrity Provide the most appropriate
-            and value based care all the time. We are just an appointment away
-            For your world class care!
-          </Text>
-        </View>
-        <View style={styles.buttonsContainer}>
-          <PrimayButton
-            title="Get Started"
-            onPress={getStartedHandler}
-            color={'#1f9aff'}
-          />
-          <PrimayButton
-            title="Login as Guest"
-            onPress={loginAsGuestHandler}
-            color={'#09aa34'}
-          />
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </>
   );
 };
 const styles = StyleSheet.create({

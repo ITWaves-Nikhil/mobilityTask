@@ -1,8 +1,13 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import UserTypeCard from '../components/UI/UserTypeCard';
-import logo from '../assets/Icons_Images/png/app-logo.png';
+import {View, Text, StyleSheet, StatusBar} from 'react-native';
+
+import {UserTypes} from '../constants/Strings';
+import {colors} from '../constants/GlobalStyles';
+
+import UserTypeCard from '../components/ui/UserTypeCard';
 import CommonBg from '../components/shared/CommonBg';
+import Logo from '../components/ui/Logo';
+import {paths} from '../constants/assets';
 
 const UserSelectScreen = ({route, navigation}) => {
   function providerTypeHandler() {
@@ -11,22 +16,36 @@ const UserSelectScreen = ({route, navigation}) => {
 
   return (
     <CommonBg>
-      <View style={styles.logoContainer}>
-        <Image style={styles.logoImage} source={logo} />
-      </View>
+      <StatusBar
+        animated={true}
+        backgroundColor={'white'}
+        barStyle={'dark-content'}
+      />
+      <Logo />
       <View style={styles.userMenuContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Select User Type</Text>
         </View>
         <View style={styles.cardContainer}>
           <UserTypeCard
-            title={'Providers'}
-            color={'blue'}
-            text={'abc'}
+            source={paths.PROVIDER_LOGO}
+            title={UserTypes.provider.title}
+            color={colors.blue}
+            text={UserTypes.provider.desc}
             onPress={providerTypeHandler}
           />
-          <UserTypeCard title={'Patients'} color={'orange'} text={'abc'} />
-          <UserTypeCard title={'Staff'} color={'brown'} text={'abc'} />
+          <UserTypeCard
+            source={paths.PATIENTS_LOGO}
+            title={UserTypes.patients.title}
+            color={colors.orange}
+            text={UserTypes.patients.desc}
+          />
+          <UserTypeCard
+            source={paths.STAFF_LOGO}
+            title={UserTypes.staff.title}
+            color={colors.rust}
+            text={UserTypes.staff.desc}
+          />
         </View>
       </View>
     </CommonBg>
@@ -58,8 +77,7 @@ const styles = StyleSheet.create({
     padding: 15,
     gap: 10,
   },
-  logoImage: {},
-  logoContainer: {width: '100%', alignItems: 'center'},
+
   userMenuContainer: {gap: 10},
   headerContainer: {padding: 8},
   headerText: {color: 'black', fontSize: 20, fontWeight: 'bold'},

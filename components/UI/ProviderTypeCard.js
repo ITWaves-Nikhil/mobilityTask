@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
-import sampleImage from '../../assets/Icons_Images/png/providers.png';
+// import sampleImage from '../../assets/Icons_Images/png/providers.png';
 
 const ProviderTypeCard = ({source, title, color, text, onPress}) => {
   const mergedStyle = [styles.userCardContainer, {backgroundColor: color}];
+  // const imagePath = `../../assets/Icons_Images/png/${source}`;
   return (
     <Pressable
       onPress={onPress}
@@ -11,8 +12,13 @@ const ProviderTypeCard = ({source, title, color, text, onPress}) => {
         pressed ? [...mergedStyle, styles.pressed] : mergedStyle
       }>
       <View style={styles.innerContainer}>
-        <Text style={[styles.titleText, styles.whiteText]}>{title}</Text>
-        <Image style={styles.iconImage} source={sampleImage} />
+        <View style={styles.userTypeContainer}>
+          <Text style={[styles.titleText, styles.whiteText]}>{title}</Text>
+          <Text style={styles.whiteText}>{text}</Text>
+        </View>
+        <View>
+          <Image style={styles.iconImage} source={source} />
+        </View>
       </View>
     </Pressable>
   );
@@ -40,7 +46,7 @@ const styles = StyleSheet.create({
     borderStyle: 'dotted',
   },
   iconImage: {height: 80, width: 80},
-  userTypeContainer: {},
+  userTypeContainer: {flex: 1},
   titleText: {fontSize: 16, fontWeight: 'bold'},
   whiteText: {
     color: 'white',
