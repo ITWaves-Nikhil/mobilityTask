@@ -55,9 +55,9 @@ const ProviderTypeScreen = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  userMenuContainer: {gap: 10},
+  userMenuContainer: {gap: 10, flex: 1},
   headerContainer: {padding: 8},
   headerText: {color: 'black', fontSize: 20, fontWeight: 'bold'},
-  cardsContainer: {gap: 10},
+  cardsContainer: {gap: 10, flex: 1},
 });
 export default ProviderTypeScreen;

@@ -1,12 +1,12 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
-import mc from '../../assets/Icons_Images/png/medical-center.png';
+// import mc from '../../assets/Icons_Images/png/medical-center.png';
 
 const ListItem = ({source, title}) => {
   return (
     <View style={styles.listItemContainer}>
       <View style={styles.iconContainer}>
-        <Image style={styles.iconImage} source={mc} />
+        <Image style={styles.iconImage} source={source} />
       </View>
       <View style={styles.listTextContainer}>
         <Text style={styles.listText}>{title}</Text>
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
   iconImage: {height: 50, width: 50},
   iconContainer: {marginHorizontal: 2},
   listTextContainer: {},
-  listText: {fontSize: 16, fontWeight: 'bold'},
+  listText: {fontSize: 16, fontWeight: 'bold', color: 'white'},
 });
 export default ListItem;

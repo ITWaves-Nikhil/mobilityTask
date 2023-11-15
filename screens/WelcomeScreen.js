@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import bg from '../assets/Icons_Images/png/bg.png';
+import {paths} from '../constants/assets';
 import logo from '../assets/Icons_Images/png/app-logo.png';
 import {colors} from '../constants/GlobalStyles';
 import PrimayButton from '../components/ui/PrimaryButton';
@@ -38,11 +39,20 @@ const WelcomeScreen = ({route, navigation}) => {
             <Image style={styles.logoImage} source={logo} />
           </View>
           <View style={styles.optionsContainer}>
-            <ListItem source={''} title={'Mobility Clinic'} />
-            <ListItem source={''} title={'Ideal Healthcare'} />
-            <ListItem source={''} title={'Mobility Rehab SVCS'} />
-            <ListItem source={''} title={'Green Prosthetics'} />
-            <ListItem source={''} title={'Care Crafters'} />
+            <ListItem
+              source={paths.MOBILITY_CLINIC}
+              title={'Mobility Clinic'}
+            />
+            <ListItem
+              source={paths.IDEAL_HEALTHCARE}
+              title={'Ideal Healthcare'}
+            />
+            <ListItem source={paths.REHAB_SVCS} title={'Mobility Rehab SVCS'} />
+            <ListItem
+              source={paths.GREEN_PROSTHETICS}
+              title={'Green Prosthetics'}
+            />
+            <ListItem source={paths.CARE_CRAFTERS} title={'Care Crafters'} />
           </View>
           <View style={styles.summaryContainer}>
             <Text style={styles.summaryText}>
@@ -82,7 +92,7 @@ const styles = StyleSheet.create({
   },
   logoImage: {},
   logoContainer: {width: '100%', alignItems: 'center'},
-  summaryText: {fontSize: 16, textAlign: 'center'},
+  summaryText: {fontSize: 16, textAlign: 'center', color: 'white'},
   optionsContainer: {width: '100%'},
   summaryContainer: {width: '100%', padding: 10},
   buttonsContainer: {width: '100%', gap: 10},

@@ -2,19 +2,19 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {colors} from '../../constants/GlobalStyles';
 
-const RadioButton = ({label}) => {
-  const [isChecked, setIsChecked] = useState(false);
+const RadioButton = ({label, checked, onPress}) => {
+  // const [isChecked, setIsChecked] = useState(false);
 
-  function handleRadioPress() {
-    console.log(isChecked);
-    setIsChecked(prevState => !prevState);
-  }
+  // function handleRadioPress() {
+  //   console.log(isChecked);
+  //   setIsChecked(prevState => !prevState);
+  // }
 
   return (
-    <Pressable style={styles.radio} onPress={handleRadioPress} hitSlop={{}}>
+    <Pressable style={styles.radio} onPress={onPress} hitSlop={{}}>
       <View
         style={
-          isChecked ? [styles.outerCircle, styles.selected] : styles.outerCircle
+          checked ? [styles.outerCircle, styles.selected] : styles.outerCircle
         }>
         <View style={styles.innerCircle}></View>
       </View>

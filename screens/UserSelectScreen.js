@@ -13,6 +13,9 @@ const UserSelectScreen = ({route, navigation}) => {
   function providerTypeHandler() {
     navigation.navigate('ProviderType');
   }
+  function patients_staff_Handler() {
+    navigation.navigate('FormScreen', {formType: 'login'});
+  }
 
   return (
     <CommonBg>
@@ -22,7 +25,7 @@ const UserSelectScreen = ({route, navigation}) => {
         barStyle={'dark-content'}
       />
       <Logo />
-      <View style={styles.userMenuContainer}>
+      <View style={(styles.userMenuContainer, {height: '100%'})}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Select User Type</Text>
         </View>
@@ -39,12 +42,14 @@ const UserSelectScreen = ({route, navigation}) => {
             title={UserTypes.patients.title}
             color={colors.orange}
             text={UserTypes.patients.desc}
+            onPress={patients_staff_Handler}
           />
           <UserTypeCard
             source={paths.STAFF_LOGO}
             title={UserTypes.staff.title}
             color={colors.rust}
             text={UserTypes.staff.desc}
+            onPress={patients_staff_Handler}
           />
         </View>
       </View>
@@ -81,6 +86,6 @@ const styles = StyleSheet.create({
   userMenuContainer: {gap: 10},
   headerContainer: {padding: 8},
   headerText: {color: 'black', fontSize: 20, fontWeight: 'bold'},
-  cardContainer: {gap: 10},
+  cardContainer: {gap: 10, flex: 1, padding: 4},
 });
 export default UserSelectScreen;

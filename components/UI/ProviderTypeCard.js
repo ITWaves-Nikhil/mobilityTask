@@ -27,7 +27,7 @@ const ProviderTypeCard = ({source, title, color, text, onPress}) => {
 const styles = StyleSheet.create({
   userCardContainer: {
     padding: 6,
-    flex: 1,
+    height: 100,
     gap: 10,
     overflow: 'hidden',
     elevation: 5,

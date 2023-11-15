@@ -6,10 +6,13 @@ const PrimaryButton = ({title, color, onPress, disabled}) => {
     <Pressable
       disabled={disabled}
       onPress={onPress}
-      style={({pressed}) =>
-        pressed
-          ? [styles.button, styles.pressed, {backgroundColor: color}]
-          : [styles.button, {backgroundColor: color}]
+      style={
+        disabled
+          ? [styles.button, styles.disabled]
+          : ({pressed}) =>
+              pressed
+                ? [styles.button, styles.pressed, {backgroundColor: color}]
+                : [styles.button, {backgroundColor: color}]
       }>
       <View style={styles.textContainer}>
         <Text style={styles.btnTitle}>{title}</Text>
@@ -27,6 +30,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.7,
   },
+  disabled: {backgroundColor: '#ccc'},
   textContainer: {padding: 12},
   pressed: {opacity: 0.6},
   btnTitle: {color: 'white', textAlign: 'center', fontSize: 16},

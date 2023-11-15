@@ -22,3 +22,8 @@ export const ProviderTypes = {
   MEDICAL_OP_CENTERS: {title: 'Medical Centers / OP Centers', desc: ''},
   WORKERS: {title: 'Workers Comp', desc: ''},
 };
+
+export const ERROR_MESSAGES = {
+  email_invalid: '',
+  name_invalid: 'Must be characters only',
+};

@@ -8,6 +8,11 @@ export const paths = {
     MEDICAL_OP_CENTERS: require('../assets/Icons_Images/png/medical-center.png'),
     WORKERS: require('../assets/Icons_Images/png/workers.png'),
   },
+  MOBILITY_CLINIC: require('../assets/Icons_Images/png/medical-center.png'),
+  IDEAL_HEALTHCARE: require('../assets/Icons_Images/png/snf_alf.png'),
+  REHAB_SVCS: require('../assets/Icons_Images/png/snf_alf.png'),
+  GREEN_PROSTHETICS: require('../assets/Icons_Images/png/snf_alf.png'),
+  CARE_CRAFTERS: require('../assets/Icons_Images/png/snf_alf.png'),
 };
 
 export const FORM_ICONS = {
@@ -23,4 +28,7 @@ export const FORM_ICONS = {
   birthday: require('../assets/Icons_Images/png/birthday.png'),
   calendar: require('../assets/Icons_Images/png/calendar.png'),
   gender: require('../assets/Icons_Images/png/gender.png'),
+  mobile: require('../assets/Icons_Images/png/Mobile.png'),
+  check: require('../assets/Icons_Images/png/thanks_check.png'),
+  firstname: require('../assets/Icons_Images/png/firstname.png'),
 };

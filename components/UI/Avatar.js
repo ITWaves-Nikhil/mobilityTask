@@ -19,13 +19,16 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
     padding: 10,
-    borderWidth: 2,
-    borderColor: 'red',
     overflow: 'hidden',
     backgroundColor: '#ccc',
     borderRadius: 100,
+    borderWidth: 2,
+    borderColor: '#ccc',
   },
-  avatarImageContainer: {alignItems: 'center', margin: 4},
-  avatarImage: {height: 100, width: 100, margin: 4},
+  avatarImageContainer: {
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  avatarImage: {height: 120, width: 120},
 });
 export default Avatar;

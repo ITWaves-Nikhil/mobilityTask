@@ -23,7 +23,7 @@ const UserTypeCard = ({source, title, color, text, onPress}) => {
 
 const styles = StyleSheet.create({
   userCardContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 8,
