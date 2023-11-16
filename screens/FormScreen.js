@@ -14,8 +14,6 @@ const Form = ({route, navigation}) => {
 
   const FormType = route.params.formType;
 
-  console.log(route.params.formType, '=>', route.params?.userType);
-
   return (
     <CommonBg>
       <StatusBar
@@ -24,9 +22,15 @@ const Form = ({route, navigation}) => {
         barStyle={'dark-content'}
       />
       {FormType === 'login' ? (
-        <LoginForm userType={route.params.userType} />
+        <LoginForm
+          userType={route.params.userType}
+          providerType={route.params.providerType}
+        />
       ) : (
-        <SignUpForm userType={route.params.userType} />
+        <SignUpForm
+          userType={route.params.userType}
+          providerType={route.params.providerType}
+        />
       )}
     </CommonBg>
   );

@@ -1,4 +1,3 @@
-import React, {useState, useRef, useEffect} from 'react';
 import {
   Text,
   View,
@@ -6,40 +5,39 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-
+import React, {useState, useRef, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import DropDownPicker from 'react-native-dropdown-picker';
 
 import Icon from './Icon';
 import Error from './Error';
-import Avatar from '../ui/Avatar';
-import FlatButton from '../ui/FlatButton';
 import Input from './Input';
-
+import CheckBox from './CheckBox';
 import RadioButton from './RadioButton';
 import PressableIcon from './PressableIcon';
+import ProviderSelectList from './ProviderSelectList';
+
+import Avatar from '../ui/Avatar';
 import PrimaryButton from '../ui/PrimaryButton';
+import FlatButton from '../ui/FlatButton';
+
 import {colors} from '../../constants/GlobalStyles';
-import CheckBox from './CheckBox';
 import {FORM_ICONS} from '../../constants/assets';
+import {PLACEHOLDERS} from '../../constants/Strings';
 import {
   isEmpty,
   validateName,
   validateEmail,
-  validateGender,
   validatePassword,
   validateMobile,
-  validateAltMobile,
+  validatePostcode,
 } from '../../util/Validators';
-
-import {PLACEHOLDERS} from '../../constants/Strings';
 
 const defaultInputProps = {
   returnKeyType: 'next',
 };
 
-const SignUpForm = ({userType}) => {
-  // console.log(userType);
+const SignUpForm = ({userType, providerType}) => {
+  // console.log('signup form', userType, '=>', providerType);
 
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(false);
@@ -78,7 +76,13 @@ const SignUpForm = ({userType}) => {
 
   useEffect(() => {
     setFormInputs(prevInputs => ({...prevInputs, ['userType']: userType}));
-  }, [userType]);
+    if (providerType !== '') {
+      setFormInputs(prevInputs => ({
+        ...prevInputs,
+        ['providerType']: providerType,
+      }));
+    }
+  }, [userType, providerType]);
 
   function passwordVisibleHandler() {
     setShowPassword(visible => !visible);
@@ -87,6 +91,9 @@ const SignUpForm = ({userType}) => {
   function inputHandler(identifier, value) {
     setFormInputs(prevInputs => ({...prevInputs, [identifier]: value}));
     validateInputs(identifier, value);
+  }
+  function selectHandler(identifier, data) {
+    setFormInputs(prevInputs => ({...prevInputs, [identifier]: data.value}));
   }
 
   function genderRadioHandler(value) {
@@ -140,7 +147,7 @@ const SignUpForm = ({userType}) => {
       case 'postcode':
         setErrors(prevErrors => ({
           ...prevErrors,
-          [identifier]: isEmpty(value),
+          [identifier]: validatePostcode(value),
         }));
         break;
 
@@ -193,7 +200,7 @@ const SignUpForm = ({userType}) => {
       address: isEmpty(formInputs.address),
       city: isEmpty(formInputs.city),
       state: isEmpty(formInputs.state),
-      postcode: isEmpty(formInputs.postcode),
+      postcode: validatePostcode(formInputs.postcode),
       country: isEmpty(formInputs.country),
       mobile: validateMobile(formInputs.mobile),
       altMobile: validateMobile(formInputs.altMobile),
@@ -228,7 +235,30 @@ const SignUpForm = ({userType}) => {
     <ScrollView>
       <KeyboardAvoidingView>
         <Avatar />
-        {userType === 'provider' ? <ProviderSelectList /> : ''}
+        {userType === 'provider' ? (
+          <ProviderSelectList
+            providerType={providerType}
+            onSelectItem={selectHandler.bind(this, 'providerType')}
+          />
+        ) : (
+          ''
+        )}
+        {userType === 'provider' ? (
+          <View style={styles.inputContainer}>
+            <Icon source={FORM_ICONS.firstname} />
+            <Input
+              config={{
+                placeholder: PLACEHOLDERS.companyName,
+                ...defaultInputProps,
+              }}
+              value={''}
+              // nextElement={firstNameRef}
+              onChangeText={inputHandler.bind(this, 'companyName')}
+            />
+          </View>
+        ) : (
+          ''
+        )}
         {/*firstname input*/}
         <View
           style={
@@ -553,36 +583,4 @@ const styles = StyleSheet.create({
   invalid: {borderColor: 'red'},
 });
 
-const ProviderSelectList = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-  ]);
-
-  return (
-    <>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        style={{borderRadius: 0, marginVertical: 10, backgroundColor: 'red'}}
-        containerStyle={{borderRadius: 0, backgroundColor: 'red'}}
-      />
-      <View style={styles.inputContainer}>
-        <Icon source={FORM_ICONS.firstname} />
-        <Input
-          config={{placeholder: 'Company Name', ...defaultInputProps}}
-          value={''}
-          // nextElement={firstNameRef}
-          // onChangeText={inputHandler.bind(this, 'firstname')}
-        />
-      </View>
-    </>
-  );
-};
 export default SignUpForm;

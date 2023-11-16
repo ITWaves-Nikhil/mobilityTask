@@ -11,6 +11,7 @@ const ProviderTypeScreen = ({route, navigation}) => {
     navigation.navigate('FormScreen', {
       formType: 'login',
       userType: 'provider',
+      providerType: providerType,
     });
   }
   return (
@@ -28,7 +29,9 @@ const ProviderTypeScreen = ({route, navigation}) => {
             source={logos.PROVIDER_TYPES.SNF_ALF}
           />
           <ProviderTypeCard
-            onPress={() => providersOnPressHandler('med_op_centers')}
+            onPress={() =>
+              providersOnPressHandler('medical_centers/op_centers')
+            }
             title={ProviderTypes.MEDICAL_OP_CENTERS.title}
             color={colors.orange}
             text={ProviderTypes.MEDICAL_OP_CENTERS?.desc}
@@ -42,7 +45,7 @@ const ProviderTypeScreen = ({route, navigation}) => {
             source={logos.PROVIDER_TYPES.HMO}
           />
           <ProviderTypeCard
-            onPress={() => providersOnPressHandler('workers')}
+            onPress={() => providersOnPressHandler('workers_comp')}
             title={ProviderTypes.WORKERS.title}
             color={colors.yellowGreen}
             text={ProviderTypes.WORKERS?.desc}

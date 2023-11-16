@@ -4,7 +4,6 @@ import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 
 const ProviderTypeCard = ({source, title, color, text, onPress}) => {
   const mergedStyle = [styles.userCardContainer, {backgroundColor: color}];
-  // const imagePath = `../../assets/Icons_Images/png/${source}`;
   return (
     <Pressable
       onPress={onPress}

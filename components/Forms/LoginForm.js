@@ -21,8 +21,8 @@ import {PLACEHOLDERS} from '../../constants/Strings';
 import {colors} from '../../constants/GlobalStyles';
 import {validatePassword, validateEmail} from '../../util/Validators';
 
-const LoginForm = ({userType}) => {
-  console.log(userType);
+const LoginForm = ({userType, providerType}) => {
+  // console.log('login form=>', userType, providerType);
   const navigation = useNavigation();
   const [formInputs, setFormInputs] = useState({
     email: '',
@@ -38,7 +38,8 @@ const LoginForm = ({userType}) => {
   function signupButtonHandler() {
     navigation.navigate('FormScreen', {
       formType: 'signup',
-      userType: `${userType}`,
+      userType: userType,
+      providerType: providerType,
     });
   }
 
@@ -65,6 +66,30 @@ const LoginForm = ({userType}) => {
     }
   }
 
+  function onSubmitHandler() {
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      email: validateEmail(formInputs.email),
+      password: validatePassword(formInputs.password),
+    }));
+
+    let noErrors = false;
+    for (const key in errors) {
+      if (
+        errors[key] === '' ||
+        errors[key] === undefined ||
+        errors[key] === null
+      ) {
+        noErrors = true;
+      } else {
+        noErrors = false;
+        break;
+      }
+    }
+    if (noErrors) {
+      // console.log('no errors');
+    }
+  }
   return (
     <View style={styles.rootContainer}>
       <View style={styles.mainContainer}>
@@ -85,7 +110,6 @@ const LoginForm = ({userType}) => {
               placeholder: PLACEHOLDERS.email,
               returnKeyType: 'next',
             }}
-            // isFocused={email.isFocused}
             ref={emailRef}
             nextElement={passwordRef}
             value={formInputs?.email}
@@ -125,7 +149,11 @@ const LoginForm = ({userType}) => {
         {!!errors.password && <Error message={errors.password} />}
 
         <FlatButton title={'Forgot Password?'} style={{color: 'black'}} />
-        <PrimaryButton title={'Login'} color={colors.cardBlue} />
+        <PrimaryButton
+          title={'Login'}
+          color={colors.cardBlue}
+          onPress={onSubmitHandler}
+        />
         <View style={styles.signupContainer}>
           <Text style={{color: 'black'}}>Don't have an account? </Text>
           <FlatButton

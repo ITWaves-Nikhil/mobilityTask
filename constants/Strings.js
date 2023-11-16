@@ -29,6 +29,7 @@ export const ERRORS = {
   email_invalid: 'Must be a valid email address',
   password_invalid: 'Must be atleast 8 characters',
   mobile_length: 'Must be exactly 10 characters',
+  postcode_length: 'Must be exactly 6 characters',
 };
 
 export const PLACEHOLDERS = {
@@ -45,4 +46,5 @@ export const PLACEHOLDERS = {
   country: 'Country',
   mobile: 'Mobile*',
   altMobile: 'Alternate Mobile*',
+  companyName: 'Company Name',
 };

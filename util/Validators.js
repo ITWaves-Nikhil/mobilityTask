@@ -42,10 +42,11 @@ export function validateMobile(number) {
     return '';
   }
 }
-
-export function validateGender(gender) {
-  if (isEmpty(gender)) {
+export function validatePostcode(number) {
+  if (isEmpty(number)) {
     return ERRORS.required;
+  } else if (number.length !== 6) {
+    return ERRORS.postcode_length;
   } else {
     return '';
   }
