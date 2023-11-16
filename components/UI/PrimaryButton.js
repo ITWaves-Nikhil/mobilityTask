@@ -22,8 +22,10 @@ const PrimaryButton = ({title, color, onPress, disabled}) => {
 };
 const styles = StyleSheet.create({
   button: {
-    width: '80%',
+    height: 56,
+    width: '100%',
     alignSelf: 'center',
+    justifyContent: 'center',
     borderRadius: 4,
     elevation: 20,
     shadowOffset: {height: 0, width: 0},

@@ -1,23 +1,24 @@
 import {regex} from '../constants/Regex';
+import {ERRORS} from '../constants/Strings';
 
 export function isEmpty(value) {
-  if (value === '') return 'Required*';
+  if (value === '') return ERRORS.required;
 }
 
 export function validateName(value) {
   if (isEmpty(value)) {
-    return 'Required*';
+    return ERRORS.required;
   } else if (!regex.name.test(value)) {
-    return 'Alphabets Only';
+    return ERRORS.name_invalid;
   } else {
     return '';
   }
 }
 export function validateEmail(value) {
   if (isEmpty(value)) {
-    return 'Required*';
+    return ERRORS.required;
   } else if (!regex.email.test(value)) {
-    return 'Must be a valid email address';
+    return ERRORS.email_invalid;
   } else {
     return '';
   }
@@ -25,22 +26,27 @@ export function validateEmail(value) {
 
 export function validatePassword(value) {
   if (isEmpty(value)) {
-    return 'Required*';
+    return ERRORS.required;
   } else if (value.length < 8) {
-    return 'Must be atleast 8 characters';
+    return ERRORS.password_invalid;
   } else {
     return '';
   }
 }
 export function validateMobile(number) {
   if (isEmpty(number)) {
-    return 'Required*';
+    return ERRORS.required;
   } else if (number.length !== 10) {
-    return 'Must be exactly 10 characters';
+    return ERRORS.mobile_length;
   } else {
     return '';
   }
 }
-export function validateAltMobile(number) {
-  number.length !== 10 ? 'Must be exactly 10 characters' : '';
+
+export function validateGender(gender) {
+  if (isEmpty(gender)) {
+    return ERRORS.required;
+  } else {
+    return '';
+  }
 }

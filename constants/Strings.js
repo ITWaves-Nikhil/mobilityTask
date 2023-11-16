@@ -23,7 +23,26 @@ export const ProviderTypes = {
   WORKERS: {title: 'Workers Comp', desc: ''},
 };
 
-export const ERROR_MESSAGES = {
-  email_invalid: '',
-  name_invalid: 'Must be characters only',
+export const ERRORS = {
+  required: 'Required*',
+  name_invalid: 'Alphabets Only',
+  email_invalid: 'Must be a valid email address',
+  password_invalid: 'Must be atleast 8 characters',
+  mobile_length: 'Must be exactly 10 characters',
+};
+
+export const PLACEHOLDERS = {
+  email: 'Email*',
+  password: 'Password*',
+  firstname: 'Firstname*',
+  lastname: 'Lastname*',
+  gender: 'Gender*',
+  dateOfBirth: 'Brithday*',
+  address: 'Address*',
+  city: 'City*',
+  state: 'State*',
+  postcode: 'Postcode*',
+  country: 'Country',
+  mobile: 'Mobile*',
+  altMobile: 'Alternate Mobile*',
 };

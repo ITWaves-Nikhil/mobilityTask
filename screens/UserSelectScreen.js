@@ -13,8 +13,11 @@ const UserSelectScreen = ({route, navigation}) => {
   function providerTypeHandler() {
     navigation.navigate('ProviderType');
   }
-  function patients_staff_Handler() {
-    navigation.navigate('FormScreen', {formType: 'login'});
+  function patientHandler() {
+    navigation.navigate('FormScreen', {formType: 'login', userType: 'patient'});
+  }
+  function staffHandler() {
+    navigation.navigate('FormScreen', {formType: 'login', userType: 'staff'});
   }
 
   return (
@@ -25,7 +28,7 @@ const UserSelectScreen = ({route, navigation}) => {
         barStyle={'dark-content'}
       />
       <Logo />
-      <View style={(styles.userMenuContainer, {height: '100%'})}>
+      <View style={styles.userMenuContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Select User Type</Text>
         </View>
@@ -42,14 +45,14 @@ const UserSelectScreen = ({route, navigation}) => {
             title={UserTypes.patients.title}
             color={colors.orange}
             text={UserTypes.patients.desc}
-            onPress={patients_staff_Handler}
+            onPress={patientHandler}
           />
           <UserTypeCard
             source={paths.STAFF_LOGO}
             title={UserTypes.staff.title}
             color={colors.rust}
             text={UserTypes.staff.desc}
-            onPress={patients_staff_Handler}
+            onPress={staffHandler}
           />
         </View>
       </View>
@@ -58,34 +61,9 @@ const UserSelectScreen = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    backgroundColor: 'white',
-  },
-  backgoundImage: {
-    flex: 1,
-    objectFit: 'cover',
-    width: '200%',
-    borderWidth: 4,
-    right: '-50%',
-    top: '-50%',
-  },
-  innerContainer: {
-    flex: 1,
-    width: '100%',
-    position: 'absolute',
-    padding: 15,
-    gap: 10,
-  },
-
-  userMenuContainer: {gap: 10},
-  headerContainer: {padding: 8},
+  userMenuContainer: {flex: 1},
+  headerContainer: {padding: 8, marginVertical: 10},
   headerText: {color: 'black', fontSize: 20, fontWeight: 'bold'},
-  cardContainer: {gap: 10, flex: 1, padding: 4},
+  cardContainer: {gap: 20, flex: 1, padding: 4},
 });
 export default UserSelectScreen;

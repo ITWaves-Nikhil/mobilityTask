@@ -1,5 +1,11 @@
 import React, {useState, useRef} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {FORM_ICONS} from '../../constants/assets';
@@ -7,18 +13,22 @@ import {FORM_ICONS} from '../../constants/assets';
 import Icon from './Icon';
 import Input from './Input';
 import Logo from '../ui/Logo';
+import Error from './Error';
 import PrimaryButton from '../ui/PrimaryButton';
 import FlatButton from '../ui/FlatButton';
 import PressableIcon from './PressableIcon';
+import {PLACEHOLDERS} from '../../constants/Strings';
 import {colors} from '../../constants/GlobalStyles';
 import {validatePassword, validateEmail} from '../../util/Validators';
-import {regex} from '../../constants/Regex';
 
-const LoginForm = () => {
+const LoginForm = ({userType}) => {
+  console.log(userType);
   const navigation = useNavigation();
+  const [formInputs, setFormInputs] = useState({
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -26,26 +36,38 @@ const LoginForm = () => {
   const passwordRef = useRef();
 
   function signupButtonHandler() {
-    navigation.navigate('FormScreen', {formType: 'signup'});
+    navigation.navigate('FormScreen', {
+      formType: 'signup',
+      userType: `${userType}`,
+    });
   }
 
   function passwordVisibleHandler() {
     setShowPassword(visible => !visible);
   }
 
-  function emailInputHandler(value) {
-    setEmail(value);
-    errors.email = validateEmail(value);
+  function inputHandler(identifier, value) {
+    setFormInputs(prevInputs => ({...prevInputs, [identifier]: value}));
+    validateInputs(identifier, value);
   }
 
-  function passwordInputHandler(value) {
-    setPassword(value);
-    errors.password = validatePassword(value);
+  function validateInputs(identifier, value) {
+    if (identifier === 'email') {
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        [identifier]: validateEmail(value),
+      }));
+    } else if (identifier === 'password') {
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        [identifier]: validatePassword(value),
+      }));
+    }
   }
 
   return (
     <View style={styles.rootContainer}>
-      <View style={{gap: 10}}>
+      <View style={styles.mainContainer}>
         <Logo />
 
         {/* email input  */}
@@ -53,21 +75,24 @@ const LoginForm = () => {
           style={
             !!errors.email
               ? [styles.inputContainer, {borderColor: 'red'}]
+              : formInputs?.email?.isFocused
+              ? [styles.inputContainer, {borderColor: 'blue'}]
               : styles.inputContainer
           }>
           <Icon source={FORM_ICONS.email} />
           <Input
             config={{
-              placeholder: 'Email*',
+              placeholder: PLACEHOLDERS.email,
               returnKeyType: 'next',
             }}
+            // isFocused={email.isFocused}
             ref={emailRef}
             nextElement={passwordRef}
-            value={email}
-            onChangeText={emailInputHandler}
+            value={formInputs?.email}
+            onChangeText={inputHandler.bind(this, 'email')}
           />
         </View>
-        {!!errors.email && <Text style={{color: 'red'}}>{errors.email}</Text>}
+        {!!errors.email && <Error message={errors.email} />}
 
         {/* password input  */}
         <View
@@ -79,13 +104,13 @@ const LoginForm = () => {
           <Icon source={FORM_ICONS.passwrord_lock} />
           <Input
             config={{
-              placeholder: 'Password*',
+              placeholder: PLACEHOLDERS.password,
               secureTextEntry: showPassword ? false : true,
               returnKeyType: 'next',
             }}
             ref={passwordRef}
-            value={password}
-            onChangeText={passwordInputHandler}
+            value={formInputs?.password}
+            onChangeText={inputHandler.bind(this, 'password')}
           />
 
           <PressableIcon
@@ -97,9 +122,7 @@ const LoginForm = () => {
             }
           />
         </View>
-        {!!errors.password && (
-          <Text style={{color: 'red'}}>{errors.password}</Text>
-        )}
+        {!!errors.password && <Error message={errors.password} />}
 
         <FlatButton title={'Forgot Password?'} style={{color: 'black'}} />
         <PrimaryButton title={'Login'} color={colors.cardBlue} />
@@ -126,6 +149,7 @@ const LoginForm = () => {
 
 const styles = StyleSheet.create({
   rootContainer: {flex: 1, justifyContent: 'space-between'},
+  mainContainer: {gap: 10},
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',

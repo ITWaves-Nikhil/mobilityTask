@@ -8,11 +8,12 @@ export const paths = {
     MEDICAL_OP_CENTERS: require('../assets/Icons_Images/png/medical-center.png'),
     WORKERS: require('../assets/Icons_Images/png/workers.png'),
   },
-  MOBILITY_CLINIC: require('../assets/Icons_Images/png/medical-center.png'),
-  IDEAL_HEALTHCARE: require('../assets/Icons_Images/png/snf_alf.png'),
-  REHAB_SVCS: require('../assets/Icons_Images/png/snf_alf.png'),
-  GREEN_PROSTHETICS: require('../assets/Icons_Images/png/snf_alf.png'),
-  CARE_CRAFTERS: require('../assets/Icons_Images/png/snf_alf.png'),
+  TRANPARENT_LOGO: require('../assets/Icons_Images/png/transparent_logo.png'),
+  MOBILITY_CLINIC: require('../assets/Icons_Images/png/mobility_clinic.png'),
+  IDEAL_HEALTHCARE: require('../assets/Icons_Images/png/ideal_healthcare.png'),
+  REHAB_SVCS: require('../assets/Icons_Images/png/mobility_rehab.png'),
+  GREEN_PROSTHETICS: require('../assets/Icons_Images/png/green_prosthetics.png'),
+  CARE_CRAFTERS: require('../assets/Icons_Images/png/care_crafters.png'),
 };
 
 export const FORM_ICONS = {

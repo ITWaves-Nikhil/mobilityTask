@@ -10,7 +10,7 @@ const ProviderTypeScreen = ({route, navigation}) => {
   function providersOnPressHandler(providerType) {
     navigation.navigate('FormScreen', {
       formType: 'login',
-      userType: providerType,
+      userType: 'provider',
     });
   }
   return (
@@ -55,9 +55,9 @@ const ProviderTypeScreen = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  userMenuContainer: {gap: 10, flex: 1},
+  userMenuContainer: {gap: 15, flex: 1, marginTop: 50},
   headerContainer: {padding: 8},
   headerText: {color: 'black', fontSize: 20, fontWeight: 'bold'},
-  cardsContainer: {gap: 10, flex: 1},
+  cardsContainer: {gap: 20, flex: 1},
 });
 export default ProviderTypeScreen;

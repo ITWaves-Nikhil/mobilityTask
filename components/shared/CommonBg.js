@@ -1,13 +1,11 @@
-import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import bg from '../../assets/Icons_Images/png/round.png';
 
 const CommonBg = ({children}) => {
-  // const {height, width} = Dimensions.get('screen');
-  // console.log(height, width);
   return (
     <View style={styles.rootContainer}>
-      <Image source={bg} style={styles.backgoundImage} />
+      <Image resizeMode="cover" source={bg} style={styles.backgoundImage} />
       <View style={styles.innerContainer}>{children}</View>
     </View>
   );
@@ -15,28 +13,36 @@ const CommonBg = ({children}) => {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    paddingHorizontal: 15,
-    // paddingVertical: 20,
+    padding: 10,
     alignItems: 'center',
-    gap: 10,
+    // justifyContent: 'flex-end',
     // backgroundColor: 'red',
     backgroundColor: 'white',
     // position: 'relative',
   },
   backgoundImage: {
     // flex: 1,
-    objectFit: 'cover',
+    // objectFit: 'cover',
     // borderWidth: 2,
     top: '-20%',
-    right: '-70%',
+    right: '-50%',
     width: '150%',
-    position: 'absolute',
+    backgroundColor: 'white',
     borderColor: 'red',
   },
   innerContainer: {
+    // backgroundColor: 'transparent',
+    // backgroundColor: 'red',
     flex: 1,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
     width: '100%',
-    marginTop: 100,
+    height: '90%',
+    // marginHorizontal: 20,
+    // justifyContent: 'center',
+    // borderWidth: 3,
+    bottom: 0,
+    position: 'absolute',
   },
 });
 export default CommonBg;

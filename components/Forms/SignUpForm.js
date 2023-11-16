@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Text,
   View,
@@ -7,7 +7,11 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 import Icon from './Icon';
+import Error from './Error';
 import Avatar from '../ui/Avatar';
 import FlatButton from '../ui/FlatButton';
 import Input from './Input';
@@ -20,23 +24,44 @@ import CheckBox from './CheckBox';
 import {FORM_ICONS} from '../../constants/assets';
 import {
   isEmpty,
-  validateMobile,
   validateName,
-  validatePassword,
-  validateAltMobile,
   validateEmail,
+  validateGender,
+  validatePassword,
+  validateMobile,
+  validateAltMobile,
 } from '../../util/Validators';
+
+import {PLACEHOLDERS} from '../../constants/Strings';
 
 const defaultInputProps = {
   returnKeyType: 'next',
 };
 
-const SignUpForm = () => {
+const SignUpForm = ({userType}) => {
+  // console.log(userType);
+
+  const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(false);
-  const [formInputs, setFormInputs] = useState({});
+  const [formInputs, setFormInputs] = useState({
+    firstname: '',
+    lastname: '',
+    gender: 'Male',
+    dateOfBirth: '',
+    address: '',
+    city: '',
+    state: '',
+    postcode: '',
+    country: '',
+    mobile: '',
+    altMobile: '',
+    email: '',
+    password: '',
+  });
   const [selectedGender, setSelectedGender] = useState('Male');
   const [errors, setErrors] = useState({});
-  const [formDisabled, setFormDisabled] = useState(true);
+  const [signUpDisabled, setSignUpDisabled] = useState(true);
+  const [termsAgreed, setTermsAgreed] = useState(false);
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -51,6 +76,10 @@ const SignUpForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  useEffect(() => {
+    setFormInputs(prevInputs => ({...prevInputs, ['userType']: userType}));
+  }, [userType]);
+
   function passwordVisibleHandler() {
     setShowPassword(visible => !visible);
   }
@@ -58,6 +87,11 @@ const SignUpForm = () => {
   function inputHandler(identifier, value) {
     setFormInputs(prevInputs => ({...prevInputs, [identifier]: value}));
     validateInputs(identifier, value);
+  }
+
+  function genderRadioHandler(value) {
+    setFormInputs(prevInputs => ({...prevInputs, ['gender']: value}));
+    setSelectedGender(`${value}`);
   }
 
   function validateInputs(identifier, value) {
@@ -75,7 +109,6 @@ const SignUpForm = () => {
           [identifier]: validateName(value),
         }));
         break;
-
       case 'dateOfBirth':
         setErrors(prevErrors => ({
           ...prevErrors,
@@ -142,7 +175,7 @@ const SignUpForm = () => {
       case 'altMobile':
         setErrors(prevErrors => ({
           ...prevErrors,
-          [identifier]: validateAltMobile(value),
+          [identifier]: validateMobile(value),
         }));
         break;
 
@@ -151,11 +184,51 @@ const SignUpForm = () => {
     }
   }
 
+  function onSubmitHandler() {
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      firstname: validateName(formInputs.firstname),
+      lastname: validateName(formInputs.lastname),
+      dateOfBirth: isEmpty(formInputs.dateOfBirth),
+      address: isEmpty(formInputs.address),
+      city: isEmpty(formInputs.city),
+      state: isEmpty(formInputs.state),
+      postcode: isEmpty(formInputs.postcode),
+      country: isEmpty(formInputs.country),
+      mobile: validateMobile(formInputs.mobile),
+      altMobile: validateMobile(formInputs.altMobile),
+      email: validateEmail(formInputs.email),
+      password: validatePassword(formInputs.password),
+    }));
+
+    let noErrors = false;
+    for (const key in errors) {
+      if (
+        errors[key] === '' ||
+        errors[key] === undefined ||
+        errors[key] === null
+      ) {
+        noErrors = true;
+      } else {
+        noErrors = false;
+        break;
+      }
+    }
+    if (noErrors) {
+      navigation.navigate('Home', {userInfo: formInputs});
+    }
+  }
+
+  function termsAgreedHandler() {
+    setTermsAgreed(true);
+    setSignUpDisabled(prevState => !prevState);
+  }
+
   return (
-    <ScrollView style={{}}>
+    <ScrollView>
       <KeyboardAvoidingView>
         <Avatar />
-
+        {userType === 'provider' ? <ProviderSelectList /> : ''}
         {/*firstname input*/}
         <View
           style={
@@ -165,7 +238,7 @@ const SignUpForm = () => {
           }>
           <Icon source={FORM_ICONS.firstname} />
           <Input
-            config={{placeholder: 'First Name*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.firstname, ...defaultInputProps}}
             value={formInputs?.firstname}
             name="firstname"
             ref={firstNameRef}
@@ -173,9 +246,7 @@ const SignUpForm = () => {
             onChangeText={inputHandler.bind(this, 'firstname')}
           />
         </View>
-        {!!errors.firstname && (
-          <Text style={{color: 'red'}}>{errors.firstname}</Text>
-        )}
+        {!!errors.firstname && <Error message={errors.firstname} />}
 
         {/*lastname input*/}
         <View
@@ -186,47 +257,37 @@ const SignUpForm = () => {
           }>
           <Icon source={FORM_ICONS.firstname} />
           <Input
-            config={{placeholder: 'Last Name*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.lastname, ...defaultInputProps}}
             value={formInputs?.lastname}
             ref={lastNameRef}
             nextElement={dobRef}
             onChangeText={inputHandler.bind(this, 'lastname')}
           />
         </View>
-        {!!errors.lastname && (
-          <Text style={{color: 'red'}}>{errors.lastname}</Text>
-        )}
+        {!!errors.lastname && <Error message={errors.lastname} />}
 
         {/*gender input*/}
         <View style={[styles.inputContainer, {borderColor: 'transparent'}]}>
           <Icon source={FORM_ICONS.gender} />
-          <Input config={{placeholder: 'Gender*', editable: false}} />
+          <Input config={{placeholder: PLACEHOLDERS.gender, editable: false}} />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            gap: 5,
-            justifyContent: 'flex-start',
-            backgroundColor: 'white',
-          }}>
+        <View style={styles.radioButtonContainer}>
           <RadioButton
             label={'Male'}
             checked={selectedGender === 'Male'}
-            onPress={() => setSelectedGender('Male')}
+            onPress={() => genderRadioHandler('Male')}
           />
           <RadioButton
             label={'Female'}
             checked={selectedGender === 'Female'}
-            onPress={() => setSelectedGender('Female')}
+            onPress={() => genderRadioHandler('Female')}
           />
           <RadioButton
             label={'Others'}
             checked={selectedGender === 'Others'}
-            onPress={() => setSelectedGender('Others')}
+            onPress={() => genderRadioHandler('Others')}
           />
         </View>
-
-        {/* {!!errors.gender && <Text style={{color: 'red'}}>{errors.gender}</Text>} */}
 
         {/*dateofbirth input*/}
         <View
@@ -239,15 +300,17 @@ const SignUpForm = () => {
           <Input
             ref={dobRef}
             nextElement={addressRef}
-            config={{placeholder: 'Birthday*', ...defaultInputProps}}
+            config={{
+              keyboardType: 'number-pad',
+              placeholder: PLACEHOLDERS.dateOfBirth,
+              ...defaultInputProps,
+            }}
             value={formInputs?.dateOfBirth}
             onChangeText={inputHandler.bind(this, 'dateOfBirth')}
           />
           <Icon source={FORM_ICONS.calendar} />
         </View>
-        {!!errors.dateOfBirth && (
-          <Text style={{color: 'red'}}>{errors.dateOfBirth}</Text>
-        )}
+        {!!errors.dateOfBirth && <Error message={errors.dateOfBirth} />}
 
         {/*address input*/}
         <View
@@ -260,14 +323,12 @@ const SignUpForm = () => {
           <Input
             ref={addressRef}
             nextElement={cityRef}
-            config={{placeholder: 'Address*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.address, ...defaultInputProps}}
             value={formInputs?.address}
             onChangeText={inputHandler.bind(this, 'address')}
           />
         </View>
-        {!!errors.address && (
-          <Text style={{color: 'red'}}>{errors.address}</Text>
-        )}
+        {!!errors.address && <Error message={errors.address} />}
 
         {/*city input*/}
         <View
@@ -280,12 +341,12 @@ const SignUpForm = () => {
           <Input
             ref={cityRef}
             nextElement={stateRef}
-            config={{placeholder: 'City*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.city, ...defaultInputProps}}
             value={formInputs?.city}
             onChangeText={inputHandler.bind(this, 'city')}
           />
         </View>
-        {!!errors.city && <Text style={{color: 'red'}}>{errors.city}</Text>}
+        {!!errors.city && <Error message={errors.city} />}
 
         {/*state input*/}
         <View
@@ -298,12 +359,12 @@ const SignUpForm = () => {
           <Input
             ref={stateRef}
             nextElement={postcodeRef}
-            config={{placeholder: 'State*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.state, ...defaultInputProps}}
             value={formInputs?.state}
             onChangeText={inputHandler.bind(this, 'state')}
           />
         </View>
-        {!!errors.state && <Text style={{color: 'red'}}>{errors.state}</Text>}
+        {!!errors.state && <Error message={errors.state} />}
 
         {/*postcode input*/}
         <View
@@ -317,7 +378,7 @@ const SignUpForm = () => {
             ref={postcodeRef}
             nextElement={countryRef}
             config={{
-              placeholder: 'Postcode',
+              placeholder: PLACEHOLDERS.postcode,
               keyboardType: 'number-pad',
               maxLength: 6,
               ...defaultInputProps,
@@ -326,9 +387,7 @@ const SignUpForm = () => {
             onChangeText={inputHandler.bind(this, 'postcode')}
           />
         </View>
-        {!!errors.postcode && (
-          <Text style={{color: 'red'}}>{errors.postcode}</Text>
-        )}
+        {!!errors.postcode && <Error message={errors.postcode} />}
 
         {/* country input*/}
         <View
@@ -341,14 +400,12 @@ const SignUpForm = () => {
           <Input
             ref={countryRef}
             nextElement={mobileRef}
-            config={{placeholder: 'Country*', ...defaultInputProps}}
+            config={{placeholder: PLACEHOLDERS.country, ...defaultInputProps}}
             value={formInputs.country}
             onChangeText={inputHandler.bind(this, 'country')}
           />
         </View>
-        {!!errors.country && (
-          <Text style={{color: 'red'}}>{errors.country}</Text>
-        )}
+        {!!errors.country && <Error message={errors.country} />}
 
         {/*  mobile input*/}
         <View
@@ -362,7 +419,7 @@ const SignUpForm = () => {
             ref={mobileRef}
             nextElement={altMobileRef}
             config={{
-              placeholder: 'Mobile*',
+              placeholder: PLACEHOLDERS.mobile,
               keyboardType: 'number-pad',
               maxLength: 10,
               minLength: 10,
@@ -372,7 +429,7 @@ const SignUpForm = () => {
             onChangeText={inputHandler.bind(this, 'mobile')}
           />
         </View>
-        {!!errors.mobile && <Text style={{color: 'red'}}>{errors.mobile}</Text>}
+        {!!errors.mobile && <Error message={errors.mobile} />}
 
         {/* alternate mobile input*/}
         <View
@@ -386,7 +443,7 @@ const SignUpForm = () => {
             ref={altMobileRef}
             nextElement={emailRef}
             config={{
-              placeholder: 'Alternate Mobile',
+              placeholder: PLACEHOLDERS.altMobile,
               keyboardType: 'number-pad',
               maxLength: 10,
               minLength: 10,
@@ -396,9 +453,7 @@ const SignUpForm = () => {
             onChangeText={inputHandler.bind(this, 'altMobile')}
           />
         </View>
-        {!!errors.altMobile && (
-          <Text style={{color: 'red'}}>{errors.altMobile}</Text>
-        )}
+        {!!errors.altMobile && <Error message={errors.altMobile} />}
 
         {/* email input  */}
         <View
@@ -416,7 +471,7 @@ const SignUpForm = () => {
             onChangeText={inputHandler.bind(this, 'email')}
           />
         </View>
-        {!!errors.email && <Text style={{color: 'red'}}>{errors.email}</Text>}
+        {!!errors.email && <Error message={errors.email} />}
 
         {/* password input */}
         <View
@@ -429,7 +484,7 @@ const SignUpForm = () => {
           <Input
             ref={passwordRef}
             config={{
-              placeholder: 'Password*',
+              placeholder: PLACEHOLDERS.password,
               secureTextEntry: showPassword ? false : true,
               ...defaultInputProps,
             }}
@@ -445,13 +500,11 @@ const SignUpForm = () => {
             }
           />
         </View>
-        {!!errors.password && (
-          <Text style={{color: 'red'}}>{errors.password}</Text>
-        )}
+        {!!errors.password && <Error message={errors.password} />}
 
         {/* services and policy*/}
-        <View style={{alignItems: 'center', flexDirection: 'row', flex: 1}}>
-          <CheckBox color={'red'} onPress={() => {}} />
+        <View style={styles.termsContainer}>
+          <CheckBox onPress={termsAgreedHandler} />
           <Text style={styles.grayText}>By tapping i agree to the </Text>
           <View
             style={{
@@ -469,24 +522,67 @@ const SignUpForm = () => {
         <PrimaryButton
           title={'Sign Up'}
           color={colors.cardBlue}
-          disabled={formDisabled}
-          onPress={() => console.log(formInputs)}
+          disabled={signUpDisabled}
+          onPress={onSubmitHandler}
         />
       </KeyboardAvoidingView>
     </ScrollView>
   );
 };
 const styles = StyleSheet.create({
-  grayText: {color: '#ccc', fontSize: 12},
-  invalid: {borderColor: 'red'},
-
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 4,
-    borderBottomWidth: 2,
+    marginVertical: 6,
+    borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
+  radioButtonContainer: {
+    flexDirection: 'row',
+    gap: 5,
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+  },
+  termsContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    marginVertical: 6,
+  },
+  grayText: {color: '#ccc', fontSize: 12},
+  invalid: {borderColor: 'red'},
 });
 
+const ProviderSelectList = () => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'},
+  ]);
+
+  return (
+    <>
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        style={{borderRadius: 0, marginVertical: 10, backgroundColor: 'red'}}
+        containerStyle={{borderRadius: 0, backgroundColor: 'red'}}
+      />
+      <View style={styles.inputContainer}>
+        <Icon source={FORM_ICONS.firstname} />
+        <Input
+          config={{placeholder: 'Company Name', ...defaultInputProps}}
+          value={''}
+          // nextElement={firstNameRef}
+          // onChangeText={inputHandler.bind(this, 'firstname')}
+        />
+      </View>
+    </>
+  );
+};
 export default SignUpForm;

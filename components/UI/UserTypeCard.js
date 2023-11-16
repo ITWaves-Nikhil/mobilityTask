@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
   },
   pressed: {opacity: 0.8},
-  iconImage: {height: 80, width: 80},
+  iconImage: {height: 90, width: 90},
   iconContainer: {marginHorizontal: 2},
   userTypeContainer: {flex: 1, gap: 5},
   titleText: {fontSize: 16, fontWeight: 'bold'},

@@ -21,10 +21,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
+    gap: 10,
   },
-  iconImage: {height: 50, width: 50},
-  iconContainer: {marginHorizontal: 2},
+  iconImage: {height: 25, width: 25, objectFit: 'contain'},
+  iconContainer: {margin: 2, padding: 4},
   listTextContainer: {},
-  listText: {fontSize: 16, fontWeight: 'bold', color: 'white'},
+  listText: {
+    fontFamily: 'SFProDisplay-Regular',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
 });
 export default ListItem;

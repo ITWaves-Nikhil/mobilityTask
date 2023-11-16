@@ -3,12 +3,12 @@ import {View, Text, StyleSheet, Pressable, Image} from 'react-native';
 import {colors} from '../../constants/GlobalStyles';
 import {FORM_ICONS} from '../../constants/assets';
 
-const CheckBox = ({label, color}) => {
+const CheckBox = ({label, color, onPress}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleRadioPress() {
-    console.log(isChecked);
     setIsChecked(prevState => !prevState);
+    onPress();
   }
 
   return (

@@ -10,7 +10,6 @@ import {
 
 import bg from '../assets/Icons_Images/png/bg.png';
 import {paths} from '../constants/assets';
-import logo from '../assets/Icons_Images/png/app-logo.png';
 import {colors} from '../constants/GlobalStyles';
 import PrimayButton from '../components/ui/PrimaryButton';
 import ListItem from '../components/ui/ListItem';
@@ -20,7 +19,7 @@ const WelcomeScreen = ({route, navigation}) => {
     navigation.navigate('UserSelect');
   }
   function loginAsGuestHandler() {
-    navigation.navigate('FormScreen', {formType: 'login', userType: 'guest'});
+    navigation.navigate('Home');
   }
   return (
     <>
@@ -36,7 +35,11 @@ const WelcomeScreen = ({route, navigation}) => {
         style={styles.backgoundImage}>
         <View style={styles.rootContainer}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logoImage} source={logo} />
+            <Image
+              style={styles.logoImage}
+              source={paths.TRANPARENT_LOGO}
+              resizeMode="contain"
+            />
           </View>
           <View style={styles.optionsContainer}>
             <ListItem
@@ -81,18 +84,24 @@ const WelcomeScreen = ({route, navigation}) => {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    paddingHorizontal: 15,
+    marginHorizontal: 20,
     paddingVertical: 20,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
+    // borderWidth: 2,
   },
   backgoundImage: {
     flex: 1,
   },
-  logoImage: {},
-  logoContainer: {width: '100%', alignItems: 'center'},
-  summaryText: {fontSize: 16, textAlign: 'center', color: 'white'},
+  logoImage: {width: '100%', height: '100%'},
+  logoContainer: {height: '15%', width: '65%', alignItems: 'center'},
+  summaryText: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'SFProDisplay-Regular',
+  },
   optionsContainer: {width: '100%'},
   summaryContainer: {width: '100%', padding: 10},
   buttonsContainer: {width: '100%', gap: 10},

@@ -10,7 +10,7 @@ const Logo = () => {
   );
 };
 const styles = StyleSheet.create({
-  logoImage: {},
-  logoContainer: {width: '100%', alignItems: 'center', paddingTop: 100},
+  logoImage: {marginBottom: 10},
+  logoContainer: {width: '100%', alignItems: 'center', paddingTop: 50},
 });
 export default Logo;

@@ -23,7 +23,11 @@ const Form = ({route, navigation}) => {
         backgroundColor={'white'}
         barStyle={'dark-content'}
       />
-      {FormType === 'login' ? <LoginForm /> : <SignUpForm />}
+      {FormType === 'login' ? (
+        <LoginForm userType={route.params.userType} />
+      ) : (
+        <SignUpForm userType={route.params.userType} />
+      )}
     </CommonBg>
   );
 };

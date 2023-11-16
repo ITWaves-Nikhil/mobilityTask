@@ -1,15 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {colors} from '../../constants/GlobalStyles';
 
 const RadioButton = ({label, checked, onPress}) => {
-  // const [isChecked, setIsChecked] = useState(false);
-
-  // function handleRadioPress() {
-  //   console.log(isChecked);
-  //   setIsChecked(prevState => !prevState);
-  // }
-
   return (
     <Pressable style={styles.radio} onPress={onPress} hitSlop={{}}>
       <View

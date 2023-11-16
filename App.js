@@ -8,6 +8,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import UserSelectScreen from './screens/UserSelectScreen';
 import ProviderTypeScreen from './screens/ProviderTypeScreen';
 import FormScreen from './screens/FormScreen';
+import HomeScreen from './screens/HomeScreen';
 import {store} from './store/store';
 
 const Stack = createStackNavigator();
@@ -39,7 +40,12 @@ function App() {
           <Stack.Screen
             name="FormScreen"
             component={FormScreen}
-            options={{title: 'form', headerTransparent: true}}
+            options={{title: 'Form', headerTransparent: true}}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{title: 'Home', headerTransparent: true}}
           />
         </Stack.Navigator>
       </NavigationContainer>
