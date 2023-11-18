@@ -8,6 +8,9 @@ export const paths = {
     MEDICAL_OP_CENTERS: require('../assets/Icons_Images/png/medical-center.png'),
     WORKERS: require('../assets/Icons_Images/png/workers.png'),
   },
+  WELCOME_BG: require('../assets/Icons_Images/png/bg.png'),
+  COMMON_BG: require('../assets/Icons_Images/png/round.png'),
+  LOGO: require('../assets/Icons_Images/png/app-logo.png'),
   TRANPARENT_LOGO: require('../assets/Icons_Images/png/transparent_logo.png'),
   MOBILITY_CLINIC: require('../assets/Icons_Images/png/mobility_clinic.png'),
   IDEAL_HEALTHCARE: require('../assets/Icons_Images/png/ideal_healthcare.png'),
@@ -17,6 +20,7 @@ export const paths = {
 };
 
 export const FORM_ICONS = {
+  avatar_placeholder: require('../assets/Icons_Images/png/patient_added3x.png'),
   email: require('../assets/Icons_Images/png/Mail.png'),
   passwrord_lock: require('../assets/Icons_Images/png/Lock.png'),
   passwrord_eye_open: require('../assets/Icons_Images/png/view_detail.png'),
@@ -32,4 +36,5 @@ export const FORM_ICONS = {
   mobile: require('../assets/Icons_Images/png/Mobile.png'),
   check: require('../assets/Icons_Images/png/thanks_check.png'),
   firstname: require('../assets/Icons_Images/png/firstname.png'),
+  company_name: require('../assets/Icons_Images/png/company_name.png'),
 };

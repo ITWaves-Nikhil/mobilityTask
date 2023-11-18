@@ -1,5 +1,5 @@
-import {regex} from '../constants/Regex';
-import {ERRORS} from '../constants/Strings';
+import {regex} from '../constants/regex';
+import {ERRORS} from '../constants/strings';
 
 export function isEmpty(value) {
   if (value === '') return ERRORS.required;
@@ -40,6 +40,16 @@ export function validateMobile(number) {
     return ERRORS.mobile_length;
   } else {
     return '';
+  }
+}
+
+export function validateAltMobile(number) {
+  if (number.length > 0) {
+    if (number.length !== 10) {
+      return ERRORS.mobile_length;
+    } else {
+      return '';
+    }
   }
 }
 export function validatePostcode(number) {

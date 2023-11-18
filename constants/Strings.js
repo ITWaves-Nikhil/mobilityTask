@@ -1,6 +1,6 @@
 export const UserTypes = {
   provider: {
-    title: 'Providers',
+    title: 'Provider',
     desc: 'HMO / Workers Comp / SNF / ALF / Medical Centers / OP Centers',
   },
   patients: {
@@ -30,6 +30,7 @@ export const ERRORS = {
   password_invalid: 'Must be atleast 8 characters',
   mobile_length: 'Must be exactly 10 characters',
   postcode_length: 'Must be exactly 6 characters',
+  user_does_not_exist: 'User does not exist. Please sign up.',
 };
 
 export const PLACEHOLDERS = {
@@ -43,8 +44,30 @@ export const PLACEHOLDERS = {
   city: 'City*',
   state: 'State*',
   postcode: 'Postcode*',
-  country: 'Country',
+  country: 'Country*',
   mobile: 'Mobile*',
-  altMobile: 'Alternate Mobile*',
+  altMobile: 'Alternate Mobile',
   companyName: 'Company Name',
+};
+
+export const FLAT_BUTTON_TITLES = {
+  forgotPassword: 'Forgot Password?',
+  signup: 'Sign Up?',
+  services: 'Service Terms',
+  policies: 'Policies',
+};
+export const PRIMARY_BUTTON_TITLES = {
+  login: 'LOGIN',
+  signup: 'SIGNUP',
+  getStarted: 'GET STARTED',
+  loginAsGuest: 'LOGIN AS GUEST',
+  logout: 'LOGOUT',
+};
+
+export const LIST_ITEM_TITLES = {
+  mobility_clinic: 'Mobility Clinic',
+  ideal_healthcare: 'Ideal Healthcare',
+  mobility_rehab: 'Mobility Rehab SVCS',
+  greeen_prosthetics: 'Green Prosthetics',
+  care_crafters: 'Care Crafters',
 };

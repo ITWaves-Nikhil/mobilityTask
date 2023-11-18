@@ -1,15 +1,16 @@
 import 'react-native-gesture-handler';
-import {StyleSheet, StatusBar} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {store} from './redux/store';
 import {Provider} from 'react-redux';
 
-import WelcomeScreen from './screens/WelcomeScreen';
-import UserSelectScreen from './screens/UserSelectScreen';
-import ProviderTypeScreen from './screens/ProviderTypeScreen';
-import FormScreen from './screens/FormScreen';
-import HomeScreen from './screens/HomeScreen';
-import {store} from './store/store';
+import WelcomeScreen from './screens/welcomeScreen/index';
+import UserSelectScreen from './screens/userSelectScreen/index';
+import ProviderTypeScreen from './screens/providerTypeScreen/index';
+import FormScreen from './screens/formScreen/index';
+import HomeScreen from './screens/homeScreen/index';
+import {NAVIGATION} from './constants/navigation';
+import {COLORS, FONTS} from './constants/theme';
 
 const Stack = createStackNavigator();
 
@@ -19,40 +20,52 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            headerTintColor: 'black',
-            // headerBackground: 'transparent',
+            headerTintColor: COLORS.black,
+            gestureEnabled: true,
+            headerTitleStyle: {
+              fontFamily: FONTS.MEDIUM,
+            },
           }}>
           <Stack.Screen
-            name="Welcome"
+            name={NAVIGATION.SCREEN_NAMES.WELCOME_SCREEN}
             component={WelcomeScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="UserSelect"
+            name={NAVIGATION.SCREEN_NAMES.USER_SELECT}
             component={UserSelectScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="ProviderType"
+            name={NAVIGATION.SCREEN_NAMES.PROVIDER_TYPE}
             component={ProviderTypeScreen}
-            options={{title: 'Provider Type', headerTransparent: true}}
+            options={{
+              title: NAVIGATION.SCREEN_TITLES.PROVIDER_TYPE_TITLE,
+              headerTransparent: true,
+            }}
           />
           <Stack.Screen
-            name="FormScreen"
+            name={NAVIGATION.SCREEN_NAMES.FORM_SCREEN}
             component={FormScreen}
-            options={{title: 'Form', headerTransparent: true}}
+            options={{
+              title: NAVIGATION.SCREEN_TITLES.FORM_SCREEN_TITLE,
+              headerTransparent: true,
+            }}
           />
           <Stack.Screen
-            name="Home"
+            name={NAVIGATION.SCREEN_NAMES.HOME_SCREEN}
             component={HomeScreen}
-            options={{title: 'Home', headerTransparent: true}}
+            options={{
+              title: NAVIGATION.SCREEN_TITLES.HOME_SCREEN_TITLE,
+              headerTransparent: true,
+              gestureEnabled: false,
+              headerLeft: () => null,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default App;
