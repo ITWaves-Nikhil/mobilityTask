@@ -180,7 +180,11 @@ const LoginForm = ({userType, providerType}) => {
         </View>
         {!!errors.password && <Error message={errors.password} />}
 
-        <FlatButton title={'Forgot Password?'} style={styles.blackText} />
+        <FlatButton
+          title={FLAT_BUTTON_TITLES.forgotPassword}
+          style={styles.blackText}
+        />
+
         <PrimaryButton
           title={PRIMARY_BUTTON_TITLES.login}
           color={COLORS.cardBlue}
