@@ -1,4 +1,4 @@
-import {Text, Pressable, StyleSheet} from 'react-native';
+import {Text, Pressable} from 'react-native';
 import {styles} from './styles';
 
 const FlatButton = ({title, style, onPress}) => {

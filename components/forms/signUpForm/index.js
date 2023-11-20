@@ -19,6 +19,7 @@ import PrimaryButton from '../../ui/primaryButton/index';
 import FlatButton from '../../ui/flatButton/index';
 import {FORM_FIELDS_IDENTIFIERS, GENDER_VALUES} from '../../../constants/enums';
 import {formatDate} from '../../../util/Helpers';
+import {UserTypes} from '../../../constants/strings';
 
 import {COLORS} from '../../../constants/theme';
 import {FORM_ICONS} from '../../../constants/assets';
@@ -93,7 +94,7 @@ const SignUpForm = ({userType, providerType}) => {
   const handleConfirm = date => {
     setFormInputs(prevInputs => ({
       ...prevInputs,
-      ['dateOfBirth']: formatDate(date),
+      [FORM_FIELDS_IDENTIFIERS.dateOfBirth]: formatDate(date),
     }));
     hideDatePicker();
   };
@@ -257,9 +258,7 @@ const SignUpForm = ({userType, providerType}) => {
     }
     if (noErrors) {
       dispatch(addUser(formInputs));
-      navigation.navigate(NAVIGATION.SCREEN_NAMES.HOME_SCREEN, {
-        userInfo: formInputs,
-      });
+      navigation.navigate(NAVIGATION.SCREEN_NAMES.WELCOME_SCREEN);
     }
   }
 
@@ -272,7 +271,7 @@ const SignUpForm = ({userType, providerType}) => {
     <ScrollView>
       <KeyboardAvoidingView>
         <Avatar />
-        {userType === 'provider' ? (
+        {userType === UserTypes.provider.title ? (
           <View style={styles.selectMenuContainer}>
             <Icon source={FORM_ICONS.firstname} />
             <ProviderSelectList
@@ -283,7 +282,7 @@ const SignUpForm = ({userType, providerType}) => {
         ) : (
           ''
         )}
-        {userType === 'provider' ? (
+        {userType === UserTypes.provider.title ? (
           <View style={styles.inputContainer}>
             <Icon source={FORM_ICONS.company_name} />
             <Input

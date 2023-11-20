@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {COLORS, FONTS} from '../../../constants/theme';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export const styles = StyleSheet.create({
   rootContainer: {flex: 1, justifyContent: 'space-between'},
@@ -23,5 +24,5 @@ export const styles = StyleSheet.create({
   },
   servicesContainer: {alignItems: 'center'},
   servicesContainerText: {flexDirection: 'row', justifyContent: 'center'},
-  redBorder: {borderColor: 'red'},
+  redBorder: {borderColor: COLORS.red},
 });

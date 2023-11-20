@@ -12,9 +12,16 @@ export const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 20,
   },
-  detailText: {
+  guestText: {
     fontSize: 20,
     color: COLORS.black,
     alignSelf: 'center',
+    fontFamily: FONTS.MEDIUM,
+  },
+
+  detailText: {
+    fontSize: 20,
+    fontFamily: FONTS.MEDIUM,
+    color: COLORS.black,
   },
 });

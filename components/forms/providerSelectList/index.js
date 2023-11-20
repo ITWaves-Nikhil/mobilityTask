@@ -1,19 +1,20 @@
 import {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {styles} from './styles';
+import {ProviderTypes} from '../../../constants/strings';
 import {PROVIDER_VALUES} from '../../../constants/enums';
 
 const ProviderSelectList = ({providerType, onSelectItem}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(providerType);
   const [items, setItems] = useState([
-    {label: 'SNF/ALF', value: PROVIDER_VALUES.SNF_ALF},
+    {label: ProviderTypes.SNF_ALF.title, value: PROVIDER_VALUES.SNF_ALF},
     {
-      label: 'Medical Centers / OP Centers',
+      label: ProviderTypes.MEDICAL_OP_CENTERS.title,
       value: PROVIDER_VALUES.Medical_Centers_OP_Centers,
     },
-    {label: 'HMO', value: PROVIDER_VALUES.HMO},
-    {label: 'Workers Comp', value: PROVIDER_VALUES.Workers_Comp},
+    {label: ProviderTypes.HMO.title, value: PROVIDER_VALUES.HMO},
+    {label: ProviderTypes.WORKERS.title, value: PROVIDER_VALUES.Workers_Comp},
   ]);
 
   return (

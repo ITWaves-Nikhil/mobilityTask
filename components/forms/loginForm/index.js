@@ -7,7 +7,14 @@ import {useSelector} from 'react-redux';
 import {findUser} from '../../../util/Helpers';
 import {styles} from './styles';
 import {FORM_FIELDS_IDENTIFIERS} from '../../../constants/enums';
-import {ERRORS} from '../../../constants/strings';
+import {
+  ERRORS,
+  FLAT_BUTTON_TITLES,
+  PRIMARY_BUTTON_TITLES,
+  PLACEHOLDERS,
+  STATIC_TEXTS,
+  FORM_PARAMS_TITLES,
+} from '../../../constants/strings';
 
 import Icon from '../icon/index';
 import Input from '../input/index';
@@ -16,7 +23,6 @@ import Error from '../error/index';
 import PrimaryButton from '../../ui/primaryButton/index';
 import FlatButton from '../../ui/flatButton/index';
 import PressableIcon from '../pressableIcon/index';
-import {PLACEHOLDERS} from '../../../constants/strings';
 import {COLORS} from '../../../constants/theme';
 import {NAVIGATION} from '../../../constants/navigation';
 import {validatePassword, validateEmail} from '../../../util/Validators';
@@ -37,7 +43,7 @@ const LoginForm = ({userType, providerType}) => {
 
   function signupButtonHandler() {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.FORM_SCREEN, {
-      formType: 'signup',
+      formType: FORM_PARAMS_TITLES.signup,
       userType: userType,
       providerType: providerType,
     });
@@ -93,7 +99,15 @@ const LoginForm = ({userType, providerType}) => {
       }
     }
     if (noErrors) {
-      if (findUser(users, formInputs.email, userType, providerType)) {
+      if (
+        findUser(
+          users,
+          formInputs.email,
+          formInputs.password,
+          userType,
+          providerType,
+        )
+      ) {
         navigation.navigate(NAVIGATION.SCREEN_NAMES.HOME_SCREEN, {
           userInfo: users[formInputs.email],
         });
@@ -168,14 +182,14 @@ const LoginForm = ({userType, providerType}) => {
 
         <FlatButton title={'Forgot Password?'} style={styles.blackText} />
         <PrimaryButton
-          title={'LOGIN'}
+          title={PRIMARY_BUTTON_TITLES.login}
           color={COLORS.cardBlue}
           onPress={onSubmitHandler}
         />
         <View style={styles.signupContainer}>
-          <Text style={styles.normalText}>Don't have an account? </Text>
+          <Text style={styles.normalText}>{STATIC_TEXTS.no_account} </Text>
           <FlatButton
-            title={'Sign Up'}
+            title={FLAT_BUTTON_TITLES.signup}
             style={{color: COLORS.blue}}
             onPress={signupButtonHandler}
           />
@@ -184,9 +198,15 @@ const LoginForm = ({userType, providerType}) => {
       <View style={styles.servicesContainer}>
         <Text style={styles.grayText}>By tapping i agree to the </Text>
         <View style={styles.servicesContainerText}>
-          <FlatButton title={'Service Terms'} style={styles.blackText} />
+          <FlatButton
+            title={FLAT_BUTTON_TITLES.services}
+            style={styles.blackText}
+          />
           <Text style={styles.grayText}> and </Text>
-          <FlatButton title={'Privacy Policy'} style={styles.blackText} />
+          <FlatButton
+            title={FLAT_BUTTON_TITLES.policies}
+            style={styles.blackText}
+          />
         </View>
       </View>
     </View>

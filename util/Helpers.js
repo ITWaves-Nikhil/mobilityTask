@@ -1,11 +1,26 @@
-export function findUser(usersObj, userEmail, userType, providerType) {
+export function findUser(
+  usersObj,
+  userEmail,
+  userPassword,
+  userType,
+  providerType,
+) {
   for (const key in usersObj) {
-    console.log(usersObj[key], userType, providerType);
     if (key === userEmail) {
-      usersObj[key]?.providerType === providerType &&
-      usersObj[key]?.userType === userType
-        ? true
-        : false;
+      if (usersObj[key]?.password === userPassword) {
+        if (
+          usersObj[key]?.providerType === providerType &&
+          usersObj[key]?.userType === userType &&
+          providerType !== undefined
+        ) {
+          return true;
+        } else if (
+          providerType === undefined &&
+          usersObj[key]?.userType === userType
+        ) {
+          return true;
+        }
+      }
     }
   }
 }
@@ -24,7 +39,7 @@ export function formatDate(date) {
   const d = new Date(date);
 
   const day = String(d.getDate()).padStart(2, '0');
-  const month = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const month = String(d.getMonth() + 1).padStart(2, '0');
   const year = d.getFullYear();
 
   return `${day}-${month}-${year}`;

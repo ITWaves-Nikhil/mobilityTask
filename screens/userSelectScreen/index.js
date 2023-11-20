@@ -1,14 +1,17 @@
 import {View, Text, StatusBar} from 'react-native';
 
-import {UserTypes} from '../../constants/strings';
-import {COLORS} from '../../constants/theme';
-
 import Logo from '../../components/ui/logo/index';
 import UserTypeCard from '../../components/ui/userTypeCard/index';
 import CommonBg from '../../components/shared/commonBg';
-import {paths} from '../../constants/assets';
 import {styles} from './styles';
+import {paths} from '../../constants/assets';
+import {COLORS} from '../../constants/theme';
 import {NAVIGATION} from '../../constants/navigation';
+import {
+  UserTypes,
+  FORM_PARAMS_TITLES,
+  USER_TYPES,
+} from '../../constants/strings';
 
 const UserSelectScreen = ({route, navigation}) => {
   function providerTypeHandler() {
@@ -16,14 +19,14 @@ const UserSelectScreen = ({route, navigation}) => {
   }
   function patientHandler() {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.FORM_SCREEN, {
-      formType: 'login',
-      userType: 'patient',
+      formType: FORM_PARAMS_TITLES.login,
+      userType: USER_TYPES.patient,
     });
   }
   function staffHandler() {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.FORM_SCREEN, {
-      formType: 'login',
-      userType: 'staff',
+      formType: FORM_PARAMS_TITLES.login,
+      userType: USER_TYPES.staff,
     });
   }
 

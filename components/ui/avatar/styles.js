@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../../constants/theme';
 export const styles = StyleSheet.create({
   rootContainer: {
     alignSelf: 'center',
@@ -6,10 +7,10 @@ export const styles = StyleSheet.create({
     width: 120,
     padding: 10,
     overflow: 'hidden',
-    backgroundColor: '#ccc',
+    backgroundColor: COLORS.gray,
     borderRadius: 100,
     borderWidth: 2,
-    borderColor: '#ccc',
+    borderColor: COLORS.gray,
   },
   avatarImageContainer: {
     alignItems: 'center',

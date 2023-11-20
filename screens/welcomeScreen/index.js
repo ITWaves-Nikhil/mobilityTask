@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
 import {View, Text, ImageBackground, Image, StatusBar} from 'react-native';
-import {paths} from '../../constants/assets';
-import {COLORS} from '../../constants/theme';
 import PrimayButton from '../../components/ui/primaryButton/index';
 import ListItem from '../../components/ui/listItem/index';
 import {styles} from './styles';
-import {NAVIGATION} from '../../constants/navigation';
-import {PRIMARY_BUTTON_TITLES, LIST_ITEM_TITLES} from '../../constants/strings';
 
-const WelcomeScreen = ({route, navigation}) => {
+import {paths} from '../../constants/assets';
+import {COLORS} from '../../constants/theme';
+import {NAVIGATION} from '../../constants/navigation';
+import {
+  PRIMARY_BUTTON_TITLES,
+  LIST_ITEM_TITLES,
+  STATIC_TEXTS,
+  USER_TYPES,
+} from '../../constants/strings';
+
+const WelcomeScreen = ({navigation}) => {
   function getStartedHandler() {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.USER_SELECT);
   }
   function loginAsGuestHandler() {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.HOME_SCREEN, {
-      userType: 'Guest',
+      userType: USER_TYPES.guest,
     });
   }
   return (
@@ -60,11 +65,7 @@ const WelcomeScreen = ({route, navigation}) => {
             />
           </View>
           <View style={styles.summaryContainer}>
-            <Text style={styles.summaryText}>
-              Care with Personal Touch and Integrity Provide the most
-              appropriate and value based care all the time. We are just an
-              appointment away For your world class care!
-            </Text>
+            <Text style={styles.summaryText}>{STATIC_TEXTS.summaryText}</Text>
           </View>
           <View style={styles.buttonsContainer}>
             <PrimayButton

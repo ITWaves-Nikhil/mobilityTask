@@ -71,3 +71,22 @@ export const LIST_ITEM_TITLES = {
   greeen_prosthetics: 'Green Prosthetics',
   care_crafters: 'Care Crafters',
 };
+
+export const STATIC_TEXTS = {
+  summaryText: `Care with Personal Touch and Integrity Provide the most
+  appropriate and value based care all the time. We are just an
+  appointment away For your world class care!`,
+  no_account: `Don't have an account?`,
+};
+
+export const FORM_PARAMS_TITLES = {
+  signup: 'signup',
+  login: 'login',
+};
+
+export const USER_TYPES = {
+  staff: 'staff',
+  patient: 'patient',
+  guest: 'Guest',
+  provider: 'provider',
+};

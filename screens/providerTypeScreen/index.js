@@ -2,19 +2,23 @@ import {View, Text} from 'react-native';
 
 import CommonBg from '../../components/shared/commonBg/index';
 import ProviderTypeCard from '../../components/ui/providerTypeCard/index';
+import {styles} from './styles';
 
 import {paths as logos} from '../../constants/assets';
-import {ProviderTypes} from '../../constants/strings';
-import {COLORS} from '../../constants/theme';
-import {styles} from './styles';
 import {NAVIGATION} from '../../constants/navigation';
+import {COLORS} from '../../constants/theme';
 import {PROVIDER_VALUES} from '../../constants/enums';
+import {
+  ProviderTypes,
+  UserTypes,
+  FORM_PARAMS_TITLES,
+} from '../../constants/strings';
 
 const ProviderTypeScreen = ({route, navigation}) => {
   function providersOnPressHandler(providerType) {
     navigation.navigate(NAVIGATION.SCREEN_NAMES.FORM_SCREEN, {
-      formType: 'login',
-      userType: 'provider',
+      formType: FORM_PARAMS_TITLES.login,
+      userType: UserTypes.provider.title,
       providerType: providerType,
     });
   }
