@@ -2,6 +2,7 @@ export const COLORS = {
   red: '#ff0000',
   blue: '#1f9aff',
   cardBlue: '#00a5ff',
+  cardBlue_50: '#0875b02f',
   orange: '#ff5b00',
   rust: '#ff754b',
   indigo: '#a0dbff',

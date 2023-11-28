@@ -58,7 +58,7 @@ export const FLAT_BUTTON_TITLES = {
 };
 export const PRIMARY_BUTTON_TITLES = {
   login: 'LOGIN',
-  signup: 'SIGNUP',
+  signup: 'SIGN UP',
   getStarted: 'GET STARTED',
   loginAsGuest: 'LOGIN AS GUEST',
   logout: 'LOGOUT',
@@ -73,9 +73,11 @@ export const LIST_ITEM_TITLES = {
 };
 
 export const STATIC_TEXTS = {
-  summaryText: `Care with Personal Touch and Integrity Provide the most
-  appropriate and value based care all the time. We are just an
-  appointment away For your world class care!`,
+  summaryText: 
+  `Care with Personal Touch and Integrity 
+  Provide the most appropriate and value based 
+  care all the time. We are just an appointment
+  away for your world class care!`,
   no_account: `Don't have an account?`,
 };
 

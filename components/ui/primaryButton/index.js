@@ -1,7 +1,7 @@
 import {styles} from './styles';
 import {View, Text, Pressable} from 'react-native';
 
-const PrimaryButton = ({title, color, onPress, disabled}) => {
+const PrimaryButton = ({title, color, onPress, disabled,size}) => {
   return (
     <Pressable
       disabled={disabled}

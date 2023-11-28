@@ -20,6 +20,7 @@ export const paths = {
 };
 
 export const FORM_ICONS = {
+  camera: require('../assets/Icons_Images/png/camera.png'),
   avatar_placeholder: require('../assets/Icons_Images/png/patient_added3x.png'),
   email: require('../assets/Icons_Images/png/Mail.png'),
   passwrord_lock: require('../assets/Icons_Images/png/Lock.png'),
@@ -38,3 +39,9 @@ export const FORM_ICONS = {
   firstname: require('../assets/Icons_Images/png/firstname.png'),
   company_name: require('../assets/Icons_Images/png/company_name.png'),
 };
+
+export const MODAL_ICONS={
+  CAMERA: require('../assets/Icons_Images/png/care_crafters.png'),
+  GALLERY: require('../assets/Icons_Images/png/care_crafters.png'),
+  FILE_MANAGER: require('../assets/Icons_Images/png/care_crafters.png'),
+}

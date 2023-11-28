@@ -8,7 +8,7 @@ const FlatButton = ({title, style, onPress,size}) => {
       style={({pressed}) =>
         pressed ? [styles.button, styles.pressed] : [styles.button]
       }>
-      <Text style={[styles.btnTitle, style]}>{title}</Text>
+      <Text style={[styles.btnTitle, style,{fontSize:size}]}>{title}</Text>
     </Pressable>
   );
 };

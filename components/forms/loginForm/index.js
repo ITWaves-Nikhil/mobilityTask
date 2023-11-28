@@ -176,6 +176,7 @@ const LoginForm = ({userType, providerType}) => {
                 ? FORM_ICONS.passwrord_eye_open
                 : FORM_ICONS.passwrord_eye_closed
             }
+            size={22}
           />
         </View>
         {!!errors.password && <Error message={errors.password} />}
@@ -183,7 +184,7 @@ const LoginForm = ({userType, providerType}) => {
         <FlatButton
           title={FLAT_BUTTON_TITLES.forgotPassword}
           style={styles.blackText}
-          size={22}
+          size={16}
         />
 
         <PrimaryButton
@@ -197,6 +198,7 @@ const LoginForm = ({userType, providerType}) => {
             title={FLAT_BUTTON_TITLES.signup}
             style={{color: COLORS.blue}}
             onPress={signupButtonHandler}
+            size={16}
           />
         </View>
       </View>

@@ -1,8 +1,9 @@
-import {StyleSheet} from 'react-native';
-import {COLORS, FONTS} from '../../../constants/theme';
+import { StyleSheet } from 'react-native';
+import { COLORS, FONTS } from '../../../constants/theme';
 
 export const styles = StyleSheet.create({
   inputContainer: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 6,
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
   blackText: {
     color: COLORS.black,
   },
-  invalid: {borderBottomColor: COLORS.red},
+  invalid: { borderBottomColor: COLORS.red },
   termsTextContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -45,4 +46,14 @@ export const styles = StyleSheet.create({
   transparentBorder: {
     borderBottomColor: 'transparent',
   },
+  cameraButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 235,
+    padding: 1,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderRadius: 20,
+  },
+  avatarPickerContainer: { justifyContent: 'center', alignItems: 'center' }
 });

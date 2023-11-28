@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.MEDIUM,
     fontSize: 16,
     backgroundColor: COLORS.white,
-    padding:Platform.select({ios:10,android:8})
+    padding:10
   },
   invalid: {backgroundColor: COLORS.red},
   hidden: {
