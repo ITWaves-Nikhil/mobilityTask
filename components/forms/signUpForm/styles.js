@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   blackText: {
     color: COLORS.black,
   },
-  invalid: {borderColor: COLORS.red},
+  invalid: {borderBottomColor: COLORS.red},
   termsTextContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -43,6 +43,6 @@ export const styles = StyleSheet.create({
     borderBottomColor: COLORS.gray,
   },
   transparentBorder: {
-    borderColor: 'transparent',
+    borderBottomColor: 'transparent',
   },
 });

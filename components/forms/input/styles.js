@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS, FONTS} from '../../../constants/theme';
+import {Platform} from 'react-native'
+
 export const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
@@ -12,6 +14,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.MEDIUM,
     fontSize: 16,
     backgroundColor: COLORS.white,
+    padding:Platform.select({ios:10,android:8})
   },
   invalid: {backgroundColor: COLORS.red},
   hidden: {

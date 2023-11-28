@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {COLORS, FONTS} from '../../../constants/theme';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export const styles = StyleSheet.create({
   rootContainer: {flex: 1, justifyContent: 'space-between'},
@@ -8,7 +7,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderBottomColor: COLORS.gray,
   },
   normalText: {fontFamily: FONTS.MEDIUM, fontSize: 16, color: COLORS.black},
@@ -24,5 +23,5 @@ export const styles = StyleSheet.create({
   },
   servicesContainer: {alignItems: 'center'},
   servicesContainerText: {flexDirection: 'row', justifyContent: 'center'},
-  redBorder: {borderColor: COLORS.red},
+  redBorder: {borderBottomColor: COLORS.red},
 });

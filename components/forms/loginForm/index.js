@@ -183,6 +183,7 @@ const LoginForm = ({userType, providerType}) => {
         <FlatButton
           title={FLAT_BUTTON_TITLES.forgotPassword}
           style={styles.blackText}
+          size={22}
         />
 
         <PrimaryButton

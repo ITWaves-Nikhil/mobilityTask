@@ -1,7 +1,7 @@
 import {Text, Pressable} from 'react-native';
 import {styles} from './styles';
 
-const FlatButton = ({title, style, onPress}) => {
+const FlatButton = ({title, style, onPress,size}) => {
   return (
     <Pressable
       onPress={onPress}
